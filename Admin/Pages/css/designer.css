@@ -1,0 +1,467 @@
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .wrap { margin: 20px 20px 0 0; }
+        
+        .designer-header {
+            background: #fff;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .designer-header h1 { margin: 0; font-size: 24px; }
+        .header-actions { display: flex; gap: 15px; }
+        .designer-columns { display: flex; gap: 20px; }
+        
+        /* LEFT COLUMN */
+        .left-column {
+            width: 280px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            max-height: calc(100vh - 100px);
+        }
+        
+        .form-list-section { padding: 15px; border-bottom: 1px solid #eee; }
+        .form-list-section h3 { margin-bottom: 10px; font-size: 14px; }
+        .form-list { max-height: 200px; overflow-y: auto; }
+        
+        .form-item {
+            padding: 8px 10px;
+            margin-bottom: 5px;
+            background: #f8f9fa;
+            border: 1px solid #e2e4e7;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .form-item:hover, .form-item.active { background: #e8f0fe; border-color: #0073aa; }
+        .form-name { font-size: 13px; }
+        .form-actions button { background: none; border: none; cursor: pointer; margin-left: 5px; }
+        
+        .fields-palette { padding: 15px; }
+        .palette-category { margin-bottom: 20px; }
+        .palette-category h4 { font-size: 12px; margin-bottom: 10px; color: #666; padding-bottom: 5px; border-bottom: 1px solid #eee; }
+        
+        .draggable-field {
+            padding: 8px 10px;
+            background: #f8f9fa;
+            border: 1px solid #e2e4e7;
+            border-radius: 6px;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            margin-bottom: 6px;
+            transition: all 0.2s;
+        }
+        .draggable-field:active { cursor: grabbing; }
+        .draggable-field:hover { background: #e8f0fe; border-color: #0073aa; }
+        
+        .main-draggable { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; }
+        .subdiv-draggable { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none; }
+        .socialsection-draggable { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none; }
+        
+        /* RIGHT COLUMN */
+        .right-column { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+        
+        .form-builder-area {
+            background: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .builder-header {
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .builder-header h2 { margin: 0; font-size: 18px; }
+        
+        #formBuilder { padding: 20px; min-height: 400px; overflow-y: auto; }
+        .builder-placeholder { text-align: center; padding: 60px; color: #999; border: 2px dashed #ddd; border-radius: 8px; background: #fff; }
+        
+        /* Main Container */
+        .main-container {
+            background: #fff;
+            border: 2px solid #667eea;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        /* Sub Div - nested support */
+        .sub-div {
+            background: #f8f9fa;
+            border: 2px solid #f5576c;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 10px 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        /* Selected state */
+        .form-field.selected, .sub-div.selected, .social-section.selected, .main-container.selected {
+            outline: 3px solid #ff6b6b;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.3);
+        }
+        
+        /* Nested Sub Div styling */
+        .sub-div .sub-div {
+            background: #fff5f5;
+            border-color: #e94560;
+            margin-left: 20px;
+        }
+        
+        .sub-div .sub-div .sub-div {
+            background: #ffe8e8;
+            border-color: #c73e56;
+            margin-left: 20px;
+        }
+        
+        /* Social Section */
+        .social-section {
+            background: #fff;
+            border: 2px solid #4facfe;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 10px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .container-controls {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            display: none;
+            gap: 5px;
+            z-index: 10;
+        }
+        
+        .main-container:hover .container-controls,
+        .sub-div:hover .container-controls,
+        .social-section:hover .container-controls {
+            display: flex;
+        }
+        
+        .container-controls button {
+            background: #fff;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .drop-zone { 
+            min-height: 60px; 
+            transition: all 0.3s;
+        }
+        .container-placeholder {
+            text-align: center;
+            padding: 30px;
+            color: #999;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            background: #fafafa;
+            font-size: 12px;
+        }
+        
+        /* Form Fields */
+        .form-field { 
+            margin-bottom: 12px; 
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .form-field:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+        .form-field label { 
+            display: block; 
+            margin-bottom: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .form-field label:hover {
+            background: #f0f7ff;
+        }
+        .form-field label.editing {
+            background: #fff;
+            outline: 2px solid #0073aa;
+            padding: 4px 8px;
+        }
+        .form-field label[contenteditable="true"] {
+            background: #fff;
+            outline: 2px solid #0073aa;
+            cursor: text;
+        }
+        .form-field input, .form-field textarea, .form-field select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+        .form-field input:focus, .form-field textarea:focus, .form-field select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        /* Checkbox and Radio */
+        .form-field.checkbox-field, .form-field.radio-field {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .form-field.checkbox-field input, .form-field.radio-field input { width: auto; }
+        .form-field.checkbox-field label, .form-field.radio-field label { display: inline; margin-bottom: 0; }
+        
+        /* Social Buttons */
+        .social-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: default;
+            transition: all 0.3s ease;
+        }
+        
+        /* Submit Button */
+        .container-submit {
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px;
+        }
+        .container-submit button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: default;
+            transition: all 0.3s ease;
+        }
+        .container-submit button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* Field action buttons */
+        .field-remove, .field-edit, .field-drag {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 10px;
+            cursor: pointer;
+            display: none;
+            z-index: 10;
+        }
+        .field-edit { right: 45px; }
+        .field-drag { right: 85px; cursor: grab; }
+        .field-drag:active { cursor: grabbing; }
+        .form-field:hover .field-remove, 
+        .form-field:hover .field-edit, 
+        .form-field:hover .field-drag { display: inline-block; }
+        
+        /* Sortable placeholder */
+        .sortable-placeholder { 
+            background: #f0f7ff; 
+            border: 2px dashed #667eea; 
+            height: 50px; 
+            margin-bottom: 12px; 
+            border-radius: 8px;
+        }
+        .ui-sortable-helper {
+            opacity: 0.6;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .drag-over { background: rgba(102, 126, 234, 0.2); border: 2px dashed #667eea; }
+        .sub-drag-over { background: rgba(245, 87, 108, 0.2); border: 2px dashed #f5576c; }
+        .social-drag-over { background: rgba(79, 172, 254, 0.2); border: 2px dashed #4facfe; }
+        .droppable-active { background: #f0f7ff; border: 2px dashed #667eea; }
+        
+        /* Tabs */
+        .tabs-container { background: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden; }
+        .tabs-header { 
+            display: flex; 
+            border-bottom: 1px solid #e0e0e0; 
+            background: #f8f9fa;
+            flex-wrap: wrap;
+        }
+        .tab-btn { 
+            padding: 12px 20px; 
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            font-size: 13px; 
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover {
+            background: #e8e8e8;
+        }
+        .tab-btn.active { 
+            background: #fff; 
+            border-bottom: 2px solid #667eea; 
+            color: #667eea; 
+        }
+        .tab-content { display: none; padding: 20px; }
+        .tab-content.active { display: block; }
+        .code-editor { width: 100%; min-height: 200px; font-family: monospace; font-size: 12px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
+        
+        /* Settings */
+        .settings-group { margin-bottom: 20px; }
+        .settings-group h4 { 
+            margin-bottom: 10px; 
+            font-size: 14px; 
+            font-weight: 600;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .setting-field { margin-bottom: 12px; }
+        .setting-field label { display: block; margin-bottom: 5px; font-size: 12px; font-weight: 500; color: #555; }
+        .setting-field input[type="color"], 
+        .setting-field input[type="text"], 
+        .setting-field input[type="number"],
+        .setting-field select { 
+            width: 100%; 
+            padding: 8px; 
+            border: 1px solid #ddd; 
+            border-radius: 6px; 
+        }
+        .setting-field input[type="range"] {
+            width: 70%;
+            margin-right: 10px;
+        }
+        .setting-field .range-value {
+            display: inline-block;
+            width: 50px;
+            text-align: center;
+            background: #f0f0f0;
+            padding: 4px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .preset-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+        .preset-btn { 
+            padding: 6px 12px; 
+            border: 1px solid #ddd; 
+            background: #fff; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        .preset-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100000;
+        }
+        .modal-content { background: #fff; border-radius: 12px; width: 400px; max-width: 90%; }
+        .modal-header { padding: 15px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; font-weight: 600; }
+        .modal-body { padding: 20px; }
+        .modal-footer { padding: 15px 20px; border-top: 1px solid #eee; display: flex; justify-content: flex-end; gap: 10px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: 500; }
+        .form-group input { width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; }
+        button.button-primary { background: #0073aa; color: #fff; border: none; padding: 8px 20px; border-radius: 6px; cursor: pointer; }
+        .empty-state { text-align: center; padding: 30px; color: #999; }
+        
+        .drag-helper {
+            background: #0073aa;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 10000;
+        }
+        
+        .edit-hint {
+            font-size: 10px;
+            color: #999;
+            margin-left: 8px;
+            display: inline-block;
+        }
+        .form-field:hover .edit-hint {
+            color: #0073aa;
+        }
+        
+        /* Selection info bar */
+        .selection-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .selection-info .clear-selection {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .selection-info .clear-selection:hover {
+            background: rgba(255,255,255,0.3);
+        }
